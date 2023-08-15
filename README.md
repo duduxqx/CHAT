@@ -9,7 +9,7 @@
 - send and receive messages globally✔️
 <br>
 <p align="center">
-<img src="./screenshots/screenshot.png" />
+<img src="./screenshots/screenshot.PNG" />
 </p>
 
 
