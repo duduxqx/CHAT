@@ -78,11 +78,15 @@
 
             let msg = msgField.value
             let username = usernameField.value
-            if (username && username.trim() !== "") {
-                socket.emit("msg", { msg, username })
-                msgField.value = "";
-            }else {
+
+            if (username === "")  {
                 alert("Nothing in username")
+            }else if (msg === "") {
+                alert("Nothing in msg")
+            }
+            else {
+                socket.emit("msg", { msg, username })
+                msgField.value = ""
             }
         }
     </script>
