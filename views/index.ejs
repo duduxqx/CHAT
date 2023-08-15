@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    
-    #chat {
-      border: 1px solid #ccc;
-      padding: 10px;
-      max-height: 300px;
-      overflow-y: scroll;
-    }
-    
-    .message {
-      background-color: #f2f2f2;
-      border-radius: 5px;
-      padding: 5px 10px;
-      margin: 5px 0;
-    }
-    
-    .user-message {
-      background-color: #dff9fb;
-      text-align: right;
-    }
-    
-    #msg,
-    #username {
-      padding: 5px;
-      margin-right: 10px;
-    }
-    
-    button {
-      padding: 5px 10px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #chat {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .message {
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 5px 0;
+        }
+
+        .user-message {
+            background-color: #dff9fb;
+            text-align: right;
+        }
+
+        #msg,
+        #username {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
-    
+
     <title>CHAT</title>
 </head>
+
 <body>
     <h1>Chat </h1>
-    <input type="text" id="msg">
-    <input type="text" id="username">
+    <input type="text" placeholder="msg" id="msg">
+    <input type="text" placeholder="username" id="username">
     <button onclick="send()">Enviar</button>
 
     <div id="chat"></div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script>    
+    <script>
         let socket = io("http://localhost:3000/")
-        
+
         socket.on("disconnect", () => {
             console.log("Desconectado")
         })
@@ -78,9 +78,13 @@
 
             let msg = msgField.value
             let username = usernameField.value
-
-            socket.emit("msg",{msg, username})
+            if (username && username.trim() !== "") {
+                socket.emit("msg", { msg, username })
+            }else {
+                alert("Nothing in username")
+            }
         }
     </script>
 </body>
+
 </html>
